@@ -1,5 +1,7 @@
 version: '3.8'
+
 services:
+
   cassandra:
     image: cassandra:4.1
     container_name: cassandra_db
@@ -10,10 +12,10 @@ services:
       - CASSANDRA_DC=datacenter1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
     healthcheck:
-      test: ["CMD-SHELL", "cqlsh -u cassandra -p cassandra -e 'describe cluster' || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD-SHELL", "cqlsh -e 'describe cluster' || exit 1"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
 
   redis:
     image: redis:7.2
@@ -22,6 +24,17 @@ services:
       - "6379:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
-      interval: 1s
+      interval: 5s
       timeout: 3s
       retries: 5
+
+  ngd-app:
+    build: .
+    container_name: ngd_fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      cassandra:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
