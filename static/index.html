@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Supply Chain Simulation</title>
     <link rel="stylesheet" href="/static/style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Supply Chain Live <span>Telemetry</span> NGD and DevOps Project</h1>
             <div class="header-controls">
                 <button id="db-btn" onclick="showDatabase()" class="secondary">Show Database</button>
+                <button id="project-details-btn" onclick="showProjectDetails()" class="secondary">Project Details</button>
                 <button id="start-btn" onclick="startSimulation()">Start Simulation</button>
             </div>
         </header>
@@ -54,7 +57,7 @@
                 </div>
             </div>
         </main>
-        
+
         <div id="db-modal" class="modal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeDatabase()">&times;</span>
@@ -79,7 +82,36 @@
                 </div>
             </div>
         </div>
+
+        <div id="project-details-modal" class="modal">
+            <div class="modal-content project-details-content">
+                <span class="close-btn" onclick="closeProjectDetails()">&times;</span>
+                <h2>Supply Chain Inventory Simulation</h2>
+                <div class="project-details-section">
+                    <p>The Supply Chain Inventory Management system is a full-stack, real-time application that models the dynamic lifecycle of goods transitioning through a warehouse. It features an automated backend simulation engine built with Python and FastAPI that processes live shipping depletion logic and controls autonomous supplier reorder triggers.</p>
+
+                    <h3>Dual-Source Architecture</h3>
+                    <ul>
+                        <li><strong>Redis (In-Memory Micro-Cache)</strong>: High-velocity source of truth for active stock telemetry, dynamic threshold attributes, and priority backorder queues.</li>
+                        <li><strong>Apache Cassandra</strong>: Immutable storage ledger for deep analytics, recording inventory snapshots, supplier orders, and telemetry logs.</li>
+                    </ul>
+
+                    <h3>Frontend Experience</h3>
+                    <p>The modern single-page UI layer uses HTML, JavaScript, and CSS to let users modify items, run live simulation scenarios, and inspect metrics across a clean dashboard and log summary views.</p>
+
+                    <h3>Backend Logic Overview</h3>
+                    <ul>
+                        <li><strong>REST Endpoints</strong>: Handles API ingestion for items, database access, and simulation state.</li>
+                        <li><strong>Simulation Engine</strong>: Runs asynchronous loops that update stock levels, triggers alerts, and queues reorder events.</li>
+                        <li><strong>Order &amp; Inventory Tracking</strong>: Maintains ledger fidelity while dynamically reflecting stock changes in the cache and persistent store.</li>
+                    </ul>
+
+                    <p>Click outside this window or press the close icon to return to the dashboard.</p>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="/static/app.js?v=2"></script>
 </body>
+
 </html>
