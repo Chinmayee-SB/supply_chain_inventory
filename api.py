@@ -102,7 +102,7 @@ def get_database():
         "logs": log_data
     }
 
-@app.get("/api/state")
+@app.get("/api/state_broken")
 def get_state():
     r = db.get_redis_client()
     
