@@ -197,6 +197,14 @@ function closeDatabase() {
     document.getElementById('db-modal').style.display = 'none';
 }
 
+function showProjectDetails() {
+    document.getElementById('project-details-modal').style.display = 'block';
+}
+
+function closeProjectDetails() {
+    document.getElementById('project-details-modal').style.display = 'none';
+}
+
 function switchDbTab(tabName, eventObj) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -281,4 +289,13 @@ function showSummary(summaryData) {
 function closeSummary() {
     document.getElementById('summary-modal').style.display = 'none';
 }
+
+window.addEventListener('click', function(event) {
+    ['project-details-modal', 'db-modal', 'summary-modal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (modal && modal.style.display === 'block' && event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
 
